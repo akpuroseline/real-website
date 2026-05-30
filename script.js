@@ -189,7 +189,7 @@
 
 
 // ── EMAILJS CONFIG ─────────────────────────────
-// I  Replace these three values with my own from emailjs.com
+// I Replaced these three values with my own from emailjs.com
 const EMAILJS_PUBLIC_KEY  = 'jzfHyFaJPsRuEFqX-';   // Account → API Keys
 const EMAILJS_SERVICE_ID  = 'service_aw4okur';   // Email Services tab
 const EMAILJS_TEMPLATE_ID = 'template_jh6bfzg';  // Email Templates tab
