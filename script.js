@@ -161,14 +161,10 @@
   const revealEls = [
     ...document.querySelectorAll('.service-card'),
     ...document.querySelectorAll('.portfolio-item'),
-    ...document.querySelectorAll('.about-right'),
-    ...document.querySelectorAll('.about-left'),
-    ...document.querySelectorAll('.contact-grid'),
-    ...document.querySelectorAll('.hero-meta'),
-    ...document.querySelectorAll('.hero-headline-wrap'),
-    ...document.querySelectorAll('.hero-badge-col'),
-    ...document.querySelectorAll('.section-label-row'),
-    ...document.querySelectorAll('.section-sub'),
+    ...document.querySelectorAll('.right'),
+    ...document.querySelectorAll('.stat'),
+    ...document.querySelectorAll('.hero-greeting'),
+    ...document.querySelectorAll('.hero-role')
   ];
 
   revealEls.forEach((el, i) => {
