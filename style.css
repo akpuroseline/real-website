@@ -445,6 +445,7 @@ section {
   color: var(--gray-400);
 }
 
+
 /* ── ABOUT ────────────────────────────────────── */
 .about-grid {
   display: grid;
@@ -452,12 +453,12 @@ section {
   gap: 5rem;
   align-items: start;
 }
-
+ 
 .about-left {
   position: sticky;
   top: calc(var(--nav-h) + 2rem);
 }
-
+ 
 /* ── HELLO CARD ───────────────────────────────── */
 .hello-card {
   border: 1px solid var(--black);
@@ -471,7 +472,7 @@ section {
   overflow: hidden;
   box-shadow: 6px 6px 0 var(--black);
 }
-
+ 
 /* Subtle grid background */
 .hello-card::before {
   content: '';
@@ -484,9 +485,9 @@ section {
   opacity: 0.5;
   z-index: 0;
 }
-
+ 
 .hello-card > * { position: relative; z-index: 1; }
-
+ 
 .hello-card-greeting {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -494,14 +495,14 @@ section {
   letter-spacing: 0.12em;
   color: var(--gray-400);
 }
-
+ 
 .hello-name-wrap {
   display: flex;
   flex-direction: column;
   line-height: 1;
   gap: 4px;
 }
-
+ 
 .hello-name-static {
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 5vw, 4rem);
@@ -509,7 +510,7 @@ section {
   letter-spacing: -0.04em;
   animation: fadeSlideUp 0.8s var(--ease-out) both;
 }
-
+ 
 .hello-name-italic {
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 5vw, 4rem);
@@ -518,19 +519,19 @@ section {
   letter-spacing: -0.04em;
   animation: fadeSlideUp 0.9s 0.1s var(--ease-out) both;
 }
-
+ 
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
+ 
 /* Role cycling */
 .hello-roles-cycle {
   height: 28px;
   position: relative;
   overflow: hidden;
 }
-
+ 
 .role-item {
   position: absolute;
   inset: 0;
@@ -552,36 +553,36 @@ section {
   pointer-events: none;
   white-space: nowrap;
 }
-
+ 
 .role-item.active {
   opacity: 1;
   transform: translateY(0);
 }
-
+ 
 /* Decorative divider */
 .hello-deco {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
-
+ 
 .deco-line {
   flex: 1;
   height: 1px;
   background: var(--gray-200);
 }
-
+ 
 .deco-star {
   font-size: 10px;
   color: var(--gray-400);
   animation: spin 8s linear infinite;
 }
-
+ 
 @keyframes spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-
+ 
 /* Location */
 .hello-card-location {
   font-family: var(--font-mono);
@@ -592,7 +593,7 @@ section {
   align-items: center;
   gap: 7px;
 }
-
+ 
 .location-dot {
   width: 7px;
   height: 7px;
@@ -600,7 +601,7 @@ section {
   background: var(--black);
   flex-shrink: 0;
 }
-
+ 
 /* Availability badge */
 .hello-availability {
   display: flex;
@@ -616,7 +617,7 @@ section {
   padding: 6px 12px;
   width: fit-content;
 }
-
+ 
 .avail-pulse {
   width: 7px;
   height: 7px;
@@ -625,7 +626,7 @@ section {
   flex-shrink: 0;
   position: relative;
 }
-
+ 
 .avail-pulse::after {
   content: '';
   position: absolute;
@@ -634,12 +635,12 @@ section {
   border: 1px solid var(--black);
   animation: pulse 2s ease-out infinite;
 }
-
+ 
 @keyframes pulse {
   0%   { transform: scale(1); opacity: 0.8; }
   100% { transform: scale(2.2); opacity: 0; }
 }
-
+ 
 .hello-line {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -648,7 +649,7 @@ section {
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
 }
-
+ 
 .about-name {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 4vw, 3.5rem);
@@ -657,36 +658,36 @@ section {
   line-height: 1;
   margin-bottom: 0.5rem;
 }
-
+ 
 .about-name em {
   font-style: italic;
 }
-
+ 
 .about-roles {
   font-size: 0.9rem;
   color: var(--gray-600);
   margin-bottom: 1.5rem;
 }
-
+ 
 .about-divider {
   width: 40px;
   height: 1px;
   background: var(--black);
   margin-bottom: 1.5rem;
 }
-
+ 
 .about-bio {
   font-size: 1.05rem;
   line-height: 1.75;
   color: var(--gray-600);
   margin-bottom: 2rem;
 }
-
+ 
 /* Skills */
 .skills-block {
   margin-bottom: 1.5rem;
 }
-
+ 
 .skills-label {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -695,13 +696,13 @@ section {
   color: var(--gray-400);
   margin-bottom: 0.6rem;
 }
-
+ 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
-
+ 
 .tag {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -713,18 +714,18 @@ section {
   background: var(--white);
   transition: background 0.15s, border-color 0.15s;
 }
-
+ 
 .tag:hover {
   background: var(--black);
   color: var(--white);
   border-color: var(--black);
 }
-
+ 
 .tag--web3 {
   border-color: var(--black);
   background: var(--gray-100);
 }
-
+ 
 .tag--soft {
   border-style: dashed;
 }
