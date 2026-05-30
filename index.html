@@ -23,6 +23,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- FIX 1: EmailJS SDK was missing — must be loaded before script.js uses it -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -114,7 +118,15 @@
       <span class="scroll-label">Scroll</span>
     </div>
   </section>
- <div class="about-grid">
+
+  <!-- FIX 2: About was a dangling div inside #home with no section wrapper and no id="about" -->
+  <!-- Now it's a proper <section id="about"> so nav links and scroll work correctly -->
+  <section id="about" aria-label="About">
+    <div class="section-label-row">
+      <span class="section-tag">// 01</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
       <div class="about-left">
         <div class="hello-card" aria-label="Animated introduction">
           <p class="hello-card-greeting">Hello, I am</p>
@@ -143,7 +155,7 @@
           </div>
         </div>
       </div>
- 
+
       <div class="about-right">
         <p class="hello-line">Hello, my name is</p>
         <h3 class="about-name">Akpu <em>Roseline</em></h3>
@@ -153,7 +165,7 @@
           I am a self-taught web developer based in South Korea with extensive marketing
           and Web3 experience. I'm here to turn your vision into a website worth remembering.
         </p>
- 
+
         <div class="skills-block">
           <p class="skills-label">Tech stack</p>
           <div class="tags">
@@ -167,7 +179,7 @@
             <span class="tag">Git</span>
           </div>
         </div>
- 
+
         <div class="skills-block">
           <p class="skills-label">Web3 skills</p>
           <div class="tags">
@@ -178,7 +190,7 @@
             <span class="tag tag--web3">NFTs &amp; Tokens</span>
           </div>
         </div>
- 
+
         <div class="skills-block">
           <p class="skills-label">Soft skills</p>
           <div class="tags">
@@ -192,7 +204,6 @@
       </div>
     </div>
   </section>
- 
 
   <!-- SERVICES -->
   <section id="services" aria-label="Services">
@@ -334,9 +345,10 @@
           <p class="contact-body">I'm always open to discussing new projects, creative ideas or opportunities to be part of something amazing.</p>
           <div class="contact-links">
             <a href="mailto:akpuroseline8@gmail.com" class="contact-link">akpuroseline8@gmail.com</a>
-            <a href="https:x.com/akpuroseline" blank="target" class="contact-link">X (Twitter) ↗</a>
-            <a href="https://www.instagram.com/akpuroseline" blank="target" class="contact-link">Instagram ↗</a>
-            <a href="https://github.com/akpuroseline" blank="target" class="contact-link">GitHub ↗</a>
+            <!-- FIX 3: Wrong attribute blank="target" → correct target="_blank" rel="noopener" -->
+            <a href="https://x.com/akpuroseline" target="_blank" rel="noopener noreferrer" class="contact-link">X (Twitter) ↗</a>
+            <a href="https://www.instagram.com/akpuroseline" target="_blank" rel="noopener noreferrer" class="contact-link">Instagram ↗</a>
+            <a href="https://github.com/akpuroseline" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub ↗</a>
           </div>
         </div>
         <div class="contact-right">
@@ -415,7 +427,7 @@
           </svg>
         </div>
         <h3>You're on the list!</h3>
-        <p>Thanks We'll reach out within 24 hours to confirm your call.</p>
+        <p>Thanks! We'll reach out within 24 hours to confirm your call.</p>
       </div>
     </div>
   </div>
