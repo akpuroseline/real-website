@@ -188,20 +188,32 @@
 })();
 
 
+// ── EMAILJS CONFIG ─────────────────────────────
+// I  Replace these three values with my own from emailjs.com
+const EMAILJS_PUBLIC_KEY  = 'jzfHyFaJPsRuEFqX-';   // Account → API Keys
+const EMAILJS_SERVICE_ID  = 'service_aw4okur';   // Email Services tab
+const EMAILJS_TEMPLATE_ID = 'template_jh6bfzg';  // Email Templates tab
+
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+
 // ── MODAL ─────────────────────────────────────
 (function () {
-  const overlay = document.getElementById('overlay');
-  const closeBtn = document.getElementById('closeModal');
-  const openBtn = document.getElementById('openModal');
-  const openBtn2 = document.getElementById('openModal2');
+  const overlay     = document.getElementById('overlay');
+  const closeBtn    = document.getElementById('closeModal');
+  const openBtn     = document.getElementById('openModal');
+  const openBtn2    = document.getElementById('openModal2');
   const heroContact = document.getElementById('heroContact');
-  const submitBtn = document.getElementById('submitBtn');
+  const submitBtn   = document.getElementById('submitBtn');
   const formContent = document.getElementById('formContent');
-  const successMsg = document.getElementById('successMsg');
+  const successMsg  = document.getElementById('successMsg');
 
   function openModal() {
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Reset form state on re-open
+    formContent.style.display = '';
+    successMsg.classList.remove('show');
   }
 
   function closeModal() {
@@ -214,54 +226,74 @@
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeModal();
-  });
+  // ── Shake helper ──
+  function shake(el) {
+    el.style.animation = 'shake 0.4s';
+    el.style.borderColor = '#000';
+    setTimeout(() => { el.style.animation = ''; el.style.borderColor = ''; }, 450);
+  }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // Form submit (demo)
+  // ── Submit with EmailJS ──
   if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
+    submitBtn.addEventListener('click', async () => {
       const firstName = document.getElementById('firstName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const service = document.getElementById('service').value;
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const company   = document.getElementById('company').value.trim();
+      const service   = document.getElementById('service').value;
+      const message   = document.getElementById('message').value.trim();
 
-      if (!firstName || !email || !service) {
-        // Simple shake on required fields
-        [document.getElementById('firstName'), document.getElementById('email'), document.getElementById('service')].forEach(el => {
-          if (!el.value.trim()) {
-            el.style.borderColor = '#000';
-            el.style.animation = 'shake 0.4s';
-            setTimeout(() => {
-              el.style.animation = '';
-              el.style.borderColor = '';
-            }, 400);
-          }
-        });
-        return;
+      // Validate required fields
+      let valid = true;
+      if (!firstName) { shake(document.getElementById('firstName')); valid = false; }
+      if (!email)     { shake(document.getElementById('email'));     valid = false; }
+      if (!service)   { shake(document.getElementById('service'));   valid = false; }
+      if (!valid) return;
+
+      // Loading state
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.6';
+
+      const templateParams = {
+        from_name:    firstName + (lastName ? ' ' + lastName : ''),
+        from_email:   email,
+        company:      company || 'Not provided',
+        service:      service,
+        message:      message || 'No additional message.',
+        to_email:     'akpuroseline8@gmail.com',
+        reply_to:     email,
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+        formContent.style.display = 'none';
+        successMsg.classList.add('show');
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        submitBtn.textContent = 'Failed — try again';
+        submitBtn.style.opacity = '1';
+        submitBtn.disabled = false;
+        setTimeout(() => { submitBtn.textContent = 'Request a Call'; }, 3000);
       }
-
-      formContent.style.display = 'none';
-      successMsg.classList.add('show');
     });
   }
 
-  // Add shake keyframe dynamically
-  const style = document.createElement('style');
-  style.textContent = `
+  // Shake keyframe
+  const s = document.createElement('style');
+  s.textContent = `
     @keyframes shake {
       0%,100%{transform:translateX(0)}
-      20%{transform:translateX(-5px)}
-      40%{transform:translateX(5px)}
-      60%{transform:translateX(-5px)}
-      80%{transform:translateX(5px)}
+      20%{transform:translateX(-6px)}
+      40%{transform:translateX(6px)}
+      60%{transform:translateX(-6px)}
+      80%{transform:translateX(6px)}
     }
   `;
-  document.head.appendChild(style);
+  document.head.appendChild(s);
 })();
 
 
@@ -293,4 +325,18 @@
   style.textContent = `.nav-links a.active { color: var(--black) !important; }
   .nav-links a.active::after { transform: scaleX(1) !important; }`;
   document.head.appendChild(style);
+})();
+
+
+// ── HELLO CARD: Role cycling ───────────────────
+(function () {
+  const roles = document.querySelectorAll('.role-item');
+  if (!roles.length) return;
+  let current = 0;
+
+  setInterval(() => {
+    roles[current].classList.remove('active');
+    current = (current + 1) % roles.length;
+    roles[current].classList.add('active');
+  }, 2200);
 })();

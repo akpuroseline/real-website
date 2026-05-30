@@ -122,6 +122,7 @@ header {
   right: 0;
   z-index: 800;
   background: rgba(250, 250, 250, 0.92);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gray-200);
   height: var(--nav-h);
@@ -457,39 +458,186 @@ section {
   top: calc(var(--nav-h) + 2rem);
 }
 
-.about-portrait-frame {
+/* ── HELLO CARD ───────────────────────────────── */
+.hello-card {
+  border: 1px solid var(--black);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
   position: relative;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 var(--black);
 }
 
-.portrait-placeholder {
-  width: 100%;
-  aspect-ratio: 3/4;
-  background: var(--gray-100);
-  border: 1px solid var(--gray-200);
+/* Subtle grid background */
+.hello-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--gray-200) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.hello-card > * { position: relative; z-index: 1; }
+
+.hello-card-greeting {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gray-400);
+}
+
+.hello-name-wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius);
+  flex-direction: column;
+  line-height: 1;
+  gap: 4px;
+}
+
+.hello-name-static {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  animation: fadeSlideUp 0.8s var(--ease-out) both;
+}
+
+.hello-name-italic {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  animation: fadeSlideUp 0.9s 0.1s var(--ease-out) both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Role cycling */
+.hello-roles-cycle {
+  height: 28px;
+  position: relative;
   overflow: hidden;
 }
 
-.portrait-initials {
-  font-family: var(--font-display);
-  font-size: 6rem;
-  font-style: italic;
-  color: var(--gray-200);
-  user-select: none;
+.role-item {
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--black);
+  color: var(--white);
+  padding: 4px 10px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-.portrait-accent {
-  position: absolute;
-  bottom: -12px;
-  right: -12px;
-  width: 60px;
-  height: 60px;
-  border: 1.5px solid var(--black);
+.role-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Decorative divider */
+.hello-deco {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.deco-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gray-200);
+}
+
+.deco-star {
+  font-size: 10px;
+  color: var(--gray-400);
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Location */
+.hello-card-location {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray-600);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.location-dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  z-index: -1;
+  background: var(--black);
+  flex-shrink: 0;
+}
+
+/* Availability badge */
+.hello-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 6px 12px;
+  width: fit-content;
+}
+
+.avail-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.avail-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--black);
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
 .hello-line {
@@ -931,6 +1079,7 @@ footer {
   position: fixed;
   inset: 0;
   background: rgba(10, 10, 10, 0.7);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   z-index: 2000;
   display: flex;

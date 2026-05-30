@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -108,11 +109,31 @@
 
     <div class="about-grid">
       <div class="about-left">
-        <div class="about-portrait-frame">
-          <div class="portrait-placeholder" aria-label="Photo of Akpu Roseline">
-            <span class="portrait-initials">AR</span>
+        <div class="hello-card" aria-label="Animated introduction">
+          <p class="hello-card-greeting">Hello, I am</p>
+          <div class="hello-name-wrap">
+            <span class="hello-name-static">Akpu</span>
+            <span class="hello-name-italic">Roseline</span>
           </div>
-          <div class="portrait-accent"></div>
+          <div class="hello-roles-cycle" aria-live="polite">
+            <span class="role-item active">Web Developer</span>
+            <span class="role-item">Web3 Builder</span>
+            <span class="role-item">UI Craftsperson</span>
+            <span class="role-item">Automation Nerd</span>
+          </div>
+          <div class="hello-deco">
+            <div class="deco-line"></div>
+            <span class="deco-star">✦</span>
+            <div class="deco-line"></div>
+          </div>
+          <p class="hello-card-location">
+            <span class="location-dot"></span>
+            Based in South Korea
+          </p>
+          <div class="hello-availability">
+            <span class="avail-pulse"></span>
+            Available for projects
+          </div>
         </div>
       </div>
 
@@ -303,11 +324,12 @@
         <div class="contact-left">
           <p class="contact-headline">Have a project<br>in mind?</p>
           <p class="contact-body">I'm always open to discussing new projects, creative ideas or opportunities to be part of something amazing.</p>
-          <div class="contact-links">
+         <div class="contact-links">
             <a href="mailto:akpuroseline8@gmail.com" class="contact-link">akpuroseline8@gmail.com</a>
             <a href="https://www.instagram.com/akpuroseline" class="contact-link">Instagram ↗</a>
             <a href="https://github.com/akpuroseline" class="contact-link">GitHub ↗</a>
           </div>
+          
         </div>
         <div class="contact-right">
           <button class="btn-book" id="openModal2">Book a Call</button>
